@@ -30,6 +30,8 @@ const propTypes = {
     optionTextStyle: Text.propTypes.style,
     sectionStyle: View.propTypes.style,
     sectionTextStyle: Text.propTypes.style,
+    selectTextStyle: Text.propTypes.style,
+    initTextStyle: Text.propTypes.style,
     cancelStyle: View.propTypes.style,
     cancelTextStyle: Text.propTypes.style,
     overlayStyle: View.propTypes.style,
@@ -46,6 +48,8 @@ const defaultProps = {
     optionTextStyle: {},
     sectionStyle: {},
     sectionTextStyle: {},
+    selectTextStyle: {},
+    initTextStyle: {},
     cancelStyle: {},
     cancelTextStyle: {},
     overlayStyle: {},
@@ -153,11 +157,20 @@ export default class ModalPicker extends BaseComponent {
         if(this.props.children) {
             return this.props.children;
         }
-        return (
-            <View style={[styles.selectStyle, this.props.selectStyle]}>
-                <Text style={[styles.selectTextStyle, this.props.selectTextStyle]}>{this.state.selected}</Text>
-            </View>
-        );
+        if (this.props.initValue === this.state.selected) {
+          return (
+              <View style={[styles.selectStyle, this.props.selectStyle]}>
+                  <Text style={[styles.initTextStyle, this.props.initTextStyle]}>{this.state.selected}</Text>
+              </View>
+          );
+        }else{
+          return (
+              <View style={[styles.selectStyle, this.props.selectStyle]}>
+                  <Text style={[styles.selectTextStyle, this.props.selectTextStyle]}>{this.state.selected}</Text>
+              </View>
+          );
+        }
+
     }
 
     render() {
